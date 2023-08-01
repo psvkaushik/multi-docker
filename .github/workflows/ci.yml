@@ -34,8 +34,8 @@ jobs:
 
       - name: Push Docker images to Docker Hub
         run: |
-        docker push  satoru429/multi-client:latest
-        docker push  satoru429/multi-nginx:latest
-        docker push  satoru429/multi-server:latest
-        docker push  satoru429/multi-worker:latest
+              docker push  satoru429/multi-client:latest
+              docker push  satoru429/multi-nginx:latest
+              docker push  satoru429/multi-server:latest
+              docker push  satoru429/multi-worker:latest
  
