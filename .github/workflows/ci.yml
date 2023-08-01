@@ -14,15 +14,15 @@ jobs:
       - uses: actions/checkout@v3
       - name: Development build to test react version
         run: |
-        docker build -t satoru429/react-test -f ./client/Dockerfile.dev
-        docker run satoru/react-test npm test -- --coverage
+              docker build -t satoru429/react-test -f ./client/Dockerfile.dev
+              docker run satoru/react-test npm test -- --coverage
       - name: Build All Docker image
         working-directory: .
         run: |
-        docker build -f Dockerfile -t satoru429/multi-client:latest ./client
-        docker build -f Dockerfile -t satoru429/multi-nginx:latest ./nginx
-        docker build -f Dockerfile -t satoru429/multi-server:latest ./server
-        docker build -f Dockerfile -t satoru429/multi-worker:latest ./worker
+              docker build -f Dockerfile -t satoru429/multi-client:latest ./client
+              docker build -f Dockerfile -t satoru429/multi-nginx:latest ./nginx
+              docker build -f Dockerfile -t satoru429/multi-server:latest ./server
+              docker build -f Dockerfile -t satoru429/multi-worker:latest ./worker
         
 
       - name: Log in to Docker Hub
