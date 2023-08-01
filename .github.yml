@@ -1,0 +1,41 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - 'master'  # Replace 'main' with your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - uses: actions/checkout@v3
+      - name: Development build to test react version
+        run: |
+        docker build -t satoru429/react-test -f ./client/Dockerfile.dev
+        docker run satoru/react-test npm test -- --coverage
+      - name: Build All Docker image
+        working-directory: .
+        run: |
+        docker build -f Dockerfile -t satoru429/multi-client:latest ./client
+        docker build -f Dockerfile -t satoru429/multi-nginx:latest ./nginx
+        docker build -f Dockerfile -t satoru429/multi-server:latest ./server
+        docker build -f Dockerfile -t satoru429/multi-worker:latest ./worker
+        
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        # Replace 'DOCKER_USERNAME' and 'DOCKER_PASSWORD' with your Docker Hub credentials set as secrets
+
+      - name: Push Docker images to Docker Hub
+        run: |
+        docker push  satoru429/multi-client:latest
+        docker push  satoru429/multi-nginx:latest
+        docker push  satoru429/multi-server:latest
+        docker push  satoru429/multi-worker:latest
+ 
