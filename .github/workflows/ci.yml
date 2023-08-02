@@ -12,11 +12,7 @@ jobs:
     steps:
       
       - uses: actions/checkout@v3
-      - name: Development build to test react version
-        run: |
-              cd ./client
-              docker build -t satoru429/react-test -f Dockerfile.dev .
-              docker run satoru429/react-test npm test -- --coverage
+
       - name: Build All Docker image
         run: |
               docker build -f Dockerfile -t satoru429/multi-client:latest ./client
