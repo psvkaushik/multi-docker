@@ -14,7 +14,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Development build to test react version
         run: |
-              docker build -t satoru429/react-test -f ./client/Dockerfile.dev .
+              cd ./client
+              docker build -t satoru429/react-test -f Dockerfile.dev .
               docker run satoru/react-test npm test -- --coverage
       - name: Build All Docker image
         run: |
