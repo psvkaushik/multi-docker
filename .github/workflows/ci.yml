@@ -17,12 +17,16 @@ jobs:
         run: |
               cd ./client
               docker build -f Dockerfile -t satoru429/multi-client:latest .
+              cd ..
               cd ./nginx
               docker build -f Dockerfile -t satoru429/multi-nginx:latest .
+              cd ..
               cd ./server
               docker build -f Dockerfile -t satoru429/multi-server:latest .
+              cd ..
               cd ./worker
               docker build -f Dockerfile -t satoru429/multi-worker:latest .
+              cd ..
         
 
       - name: Log in to Docker Hub
