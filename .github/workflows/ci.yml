@@ -15,10 +15,14 @@ jobs:
 
       - name: Build All Docker image
         run: |
-              docker build -f Dockerfile -t satoru429/multi-client:latest ./client
-              docker build -f Dockerfile -t satoru429/multi-nginx:latest ./nginx
-              docker build -f Dockerfile -t satoru429/multi-server:latest ./server
-              docker build -f Dockerfile -t satoru429/multi-worker:latest ./worker
+              cd ./client
+              docker build -f Dockerfile -t satoru429/multi-client:latest .
+              cd ./nginx
+              docker build -f Dockerfile -t satoru429/multi-nginx:latest .
+              cd ./server
+              docker build -f Dockerfile -t satoru429/multi-server:latest .
+              cd ./worker
+              docker build -f Dockerfile -t satoru429/multi-worker:latest .
         
 
       - name: Log in to Docker Hub
